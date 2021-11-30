@@ -1,0 +1,227 @@
+import axios from 'axios';
+import React, {useState} from 'react'
+import "./AddUser.css"
+import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
+
+function AddUser() {
+
+  const history = useHistory();
+
+  const[addUser, setAddUser] = useState({
+    "fname": "",
+    "lname": "",
+    "email": "",
+    "clients": "",
+    "picture": "",
+    "age": "",
+    "gender": "",
+    "projects": "",
+    "about": "",
+    "id": "",
+    "residence": "",
+    "skype": "",
+    "photo_capture": "",
+    "telephonic_talk": "",
+    "phone": "",
+    "designation":""
+  })
+
+  function handleChange(event){
+    const {name, value} = event.target;
+
+    setAddUser(prevValue=>{
+      return {
+          ...prevValue,
+          [name] : value
+      }
+    })
+  }
+
+  function onAdd(){
+    console.log(addUser);
+     axios.post(`https://6173de3a110a740017223189.mockapi.io/users`, 
+      addUser
+    ).then(data=>{
+      swal({
+        title: "User  has been added successfully",
+        icon: "success",
+        button: "Aww yiss!",
+      });
+      history.push(`/`)})
+    
+    
+  }
+
+  
+
+    return (
+        <section className="h-100 h-custom gradient-custom-2">
+  <div className="container py-5 h-100">
+    <div className="row d-flex justify-content-center align-items-center h-100">
+      <div className="col-12">
+        <div className="card card-registration card-registration-2" style={{borderRadius: "15px"}}>
+          <div className="card-body p-0">
+            <div className="row g-0">
+              <div className="col-lg-6">
+                <div className="p-5">
+                  <h3 className="fw-normal mb-5" style={{color: "#4835d4"}}>General Infomation</h3>
+
+                  <div className="row">
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text" name="fname" className="form-control form-control-lg" onChange={handleChange} value={addUser.fname}/>
+                        <label className="form-label">First name</label>
+                      </div>
+
+                    </div>
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text"  name="lname" className="form-control form-control-lg" onChange={handleChange} value={addUser.lname} />
+                        <label className="form-label">Last name</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                  <div className="mb-4 pb-2">
+                    <div className="form-outline">
+                      <input type="text" name="designation" className="form-control form-control-lg" onChange={handleChange} value={addUser.designation} />
+                      <label className="form-label" >Designation</label>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text" name="clients" className="form-control form-control-lg" onChange={handleChange} value={addUser.clients} />
+                        <label className="form-label">Happy Clients</label>
+                      </div>
+
+                    </div>
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text" name="projects" className="form-control form-control-lg" onChange={handleChange} value={addUser.projects} />
+                        <label className="form-label">Projects</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div className="mb-4 pb-2">
+                    <div className="form-outline">
+                      <input type="text" name="picture" className="form-control form-control-lg" onChange={handleChange} value={addUser.picture}/>
+                      <label className="form-label" >Photo Url</label>
+                    </div>
+                  </div>
+
+               
+
+                <div className="row">
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text" name="photo_capture" className="form-control form-control-lg" onChange={handleChange} value={addUser.photo_capture}/>
+                        <label className="form-label">Photo Capture</label>
+                      </div>
+
+                    </div>
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text" name="telephonic_talk" className="form-control form-control-lg" onChange={handleChange} value={addUser.telephonic_talk}/>
+                        <label className="form-label">Telephonic Talk</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text" name="gender" className="form-control form-control-lg" onChange={handleChange} value={addUser.gender}/>
+                        <label className="form-label">Gender</label>
+                      </div>
+
+                    </div>
+                    <div className="col-md-6 mb-4 pb-2">
+
+                      <div className="form-outline">
+                        <input type="text" name="age" className="form-control form-control-lg" onChange={handleChange} value={addUser.age}/>
+                        <label className="form-label" for="form3Examplev3">Age</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  </div>
+
+              </div>
+              <div className="col-lg-6 bg-indigo text-white">
+                <div className="p-5">
+                  <h3 className="fw-normal mb-5">Contact Details</h3>
+
+                  <div className="mb-4 pb-2">
+                    <div className="form-outline form-white">
+                      <input type="text" name="email" className="form-control form-control-lg" onChange={handleChange} value={addUser.email}/>
+                      <label className="form-label">Email</label>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 pb-2">
+                    <div className="form-outline form-white">
+                      <input type="text" name="phone" className="form-control form-control-lg" onChange={handleChange} value={addUser.phone}/>
+                      <label className="form-label">Mobile</label>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 pb-2">
+                    <div className="form-outline form-white">
+                      <input type="text" name="skype" className="form-control form-control-lg" onChange={handleChange} value={addUser.skype}/>
+                      <label className="form-label" >Skype</label>
+                    </div>
+                  </div>
+
+                  
+
+                  <div className="mb-4 pb-2">
+                    <div className="form-outline form-white">
+                      <input type="text" name="residence" className="form-control form-control-lg" onChange={handleChange} value={addUser.residence} />
+                      <label className="form-label" >Country</label>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 pb-2">
+                    <div className="form-outline form-white">
+                      <input type="text" name="about" className="form-control form-control-lg"onChange={handleChange} value={addUser.about} />
+                      <label className="form-label" >About</label>
+                    </div>
+                  </div>
+
+              
+
+                  
+
+                  <button type="button" className="btn btn-light btn-lg" data-mdb-ripple-color="dark" onClick={onAdd}>Add User</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    )
+}
+
+export default AddUser
